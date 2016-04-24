@@ -1,0 +1,6 @@
+[submodule "sensor-gps"]
+	path = sensor-gps
+	url = /home/pi/gitlocal/bare/sensor-gps.git/
+[submodule "sensor-imu"]
+	path = sensor-imu
+	url = /home/pi/gitlocal/bare/sensor-imu.git/
