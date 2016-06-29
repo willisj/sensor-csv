@@ -1,6 +1,6 @@
 [submodule "sensor-gps"]
 	path = sensor-gps
-	url = ./sensor-gps/
+	url = https://github.com/willisj/sensor-gps.git
 [submodule "sensor-imu"]
 	path = sensor-imu
-	url = ./sensor-gps/
+	url = https://github.com/willisj/sensor-imu.git
