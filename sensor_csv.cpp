@@ -30,8 +30,8 @@ void print_gps_part(){
 	char time_string[300];
 	
 	
-	sprintf(time_string, "%lf, %d, %lf, %lf, %lf", 
-		f.time, newdata.satellites_used,  f.latitude, f.longitude, f.altitude);
+	sprintf(time_string, "%lf, %d, %lf, %lf, %lf, %lf, %lf", 
+		f.time, newdata.satellites_used,  f.latitude, f.longitude, f.altitude, f.speed, f.track);
 
 	std::cout << time_string; 
 	if(useOutputFile){
