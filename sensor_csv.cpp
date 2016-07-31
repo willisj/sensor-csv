@@ -22,31 +22,35 @@ gps_res gps;
 imu_res imu(5555); 
 struct imu_data_t newdata;
 
-void print_gps_part(){
+void mark_gps(){
 	struct gps_data_t newdata;
+    gps_fix_t f;
 
-	gps.get_gps_data(&newdata);
-	gps_fix_t f = newdata.fix;
+	if (!gps.get_gps_data(&newdata))
+        return;
+
+	f = newdata.fix;
 	char time_string[300];
 	
 	
-	sprintf(time_string, "%lf, %d, %lf, %lf, %lf, %lf, %lf", 
+	sprintf(time_string, "%lf, %d, %lf, %lf, %lf, %lf, %lf\n", 
 		f.time, newdata.satellites_used,  f.latitude, f.longitude, f.altitude, f.speed, f.track);
 
 	std::cout << time_string; 
 	if(useOutputFile){
-		outStream << time_string ;
+		outStream << time_string;
 
 	}
 }
 
-void print_imu_part(){
+void mark_imu(){
 	char imu_string[300];
 	
 	
-	imu.get_imu_data(&newdata);
+	if (!imu.get_imu_data(&newdata))
+        return;
 		
-	sprintf(imu_string, "%lf, %lf, %lf, %lf, %lf, %lf, %lf, %lf, %lf, %lf", 
+	sprintf(imu_string, "%lf, %lf, %lf, %lf, %lf, %lf, %lf, %lf, %lf, %lf\n", 
 		newdata.timestamp, newdata.accel.x, newdata.accel.y, newdata.accel.z,
 		newdata.gyro.x, newdata.gyro.y, newdata.gyro.z,
 		newdata.mag.x, newdata.mag.y, newdata.mag.z );
@@ -99,20 +103,15 @@ int main(int argc, char *argv[])
 	if(useOutputFile){
 		outStream.open(outputFile);
 		outStream << csvHeader << std::endl;
-	}
+    }
 
-    	for (;;) {
-		print_gps_part();
-		std::cout << ", ";
-		if(useOutputFile) outStream << ", " ;
+    for (;;) {
+        mark_gps();
 
-		print_imu_part();
+        mark_imu();
 
-		std::cout << std::endl;
-		if(useOutputFile) outStream << std::endl ;
-
-		usleep(10000);
-    	}
+        usleep(10000);
+    }
 
 	// DONE
 	
