@@ -4,9 +4,6 @@
 [submodule "sensor-imu"]
 	path = sensor-imu
 	url = https://github.com/willisj/sensor-imu.git
-[submodule "sensor-wifi"]
-	path = sensor-wifi
-	url = pi@10.0.0.8:~/gitlocal/bare/sensor-wifi.git/
 [submodule "sensor-misc"]
 	path = sensor-misc
 	url = https://github.com/willisj/sensor-misc.git

@@ -72,6 +72,7 @@ void mark_wireshark(misc_res* misc){
     uint32_t rmac, dmac, tmac;
     char * ssid, *token = NULL;
     size_t index = 0;
+    uint8_t first = 1;
 
     rcv_sz = misc->readline((void **)&data, 2048);
 
@@ -85,6 +86,10 @@ void mark_wireshark(misc_res* misc){
         if( strlen(token) <= 0 )
             break;
 
+	if(first)
+		first = 0;
+	else
+		printf(", ");
         // frame.time_epoch,radiotap.dbm_antsignal,wlan.fc.type,wlan.fc.subtype,wlan.ra,wlan.da,wlan.ta,wlan_mgt.ssid
         switch(index++){
             case 0:
@@ -109,10 +114,10 @@ void mark_wireshark(misc_res* misc){
                 printf("\"ta\"");
                 break;
             case 7:
-                printf("\"ssid\",");
+                printf("\"ssid\"");
                 break;
         }
-        printf(":\"%s\", ", token);
+        printf(":\"%s\"", token);
 
         token = strtok(NULL,",\n");
     }
